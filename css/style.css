@@ -1,0 +1,2655 @@
+/* ==========================================================================
+   LUXESTAY - LUXURY HOTEL & RESORT BOOKING PLATFORM
+   Web Development Internship — Task 5 (Asif Shah)
+   Pure CSS3 Architecture &bull; Luxury Ivory, Champagne Gold & Forest Green Aesthetic
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & CSS Custom Properties
+   -------------------------------------------------------------------------- */
+:root {
+  /* Primary Luxury Color Palette */
+  --color-forest-dark: #091713;
+  --color-forest: #0f2520;
+  --color-forest-light: #16362e;
+  --color-forest-card: rgba(15, 37, 32, 0.85);
+
+  --color-gold: #d4af37;
+  --color-gold-light: #e5c558;
+  --color-gold-dark: #b89025;
+  --color-gold-glow: rgba(212, 175, 55, 0.25);
+  --color-gold-border: rgba(212, 175, 55, 0.28);
+  --color-gold-bg: rgba(212, 175, 55, 0.08);
+
+  --color-ivory: #fcfaf6;
+  --color-ivory-warm: #f5f0e6;
+  --color-cream: #ebe4d5;
+
+  --color-charcoal-dark: #0c0f11;
+  --color-charcoal: #14181a;
+  --color-charcoal-card: rgba(20, 24, 26, 0.9);
+  --color-charcoal-light: #20262a;
+
+  /* Text Colors */
+  --text-light: #fcfaf6;
+  --text-muted: #a6b2af;
+  --text-dark: #121516;
+  --text-dark-muted: #5a6568;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-serif-caps: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing & Sizing */
+  --container-width: 1240px;
+  --header-height: 80px;
+  --announcement-height: 42px;
+  --section-padding: 100px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  /* Shadows & Glassmorphism */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.22);
+  --glass-blur: blur(14px);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Styles
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 20px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-forest-dark);
+  color: var(--text-light);
+  line-height: 1.65;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout Utilities & Typography
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.section {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.75rem auto;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-serif-caps);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: var(--color-gold-bg);
+  border: 1px solid var(--color-gold-border);
+  padding: 0.35rem 1rem;
+  border-radius: var(--border-radius-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 600;
+  color: var(--color-ivory);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.section-divider {
+  width: 70px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 1.5rem auto 0 auto;
+}
+
+.section-divider.align-left {
+  margin: 1.5rem 0 0 0;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+.demo-tag {
+  display: inline-block;
+  color: var(--color-gold);
+  font-size: 0.8125rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons & Interactive Elements
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif-caps);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 50%, var(--color-gold-dark) 100%);
+  color: var(--color-forest-dark);
+  border-color: var(--color-gold);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #f0d879 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+}
+
+.btn-outline-gold:hover {
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.75rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   5. Section 1: Announcement Bar
+   -------------------------------------------------------------------------- */
+.announcement-bar {
+  background: #060e0c;
+  border-bottom: 1px solid var(--color-gold-border);
+  font-size: 0.8125rem;
+  color: var(--color-ivory-warm);
+  min-height: var(--announcement-height);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1001;
+  transition: transform var(--transition-normal);
+}
+
+.announcement-bar.closed {
+  display: none;
+}
+
+.announcement-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.announcement-badge {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-forest-dark);
+  background: var(--color-gold);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--border-radius-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.announcement-text strong {
+  color: var(--color-gold-light);
+}
+
+.announcement-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.announcement-link {
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.announcement-link:hover {
+  color: var(--color-gold-light);
+  text-decoration: underline;
+}
+
+.announcement-close {
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.2rem;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.announcement-close:hover {
+  color: var(--color-ivory);
+}
+
+/* --------------------------------------------------------------------------
+   6. Section 2: Sticky Header & Navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: rgba(9, 23, 19, 0.88);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  z-index: 1000;
+  transition: all var(--transition-normal);
+}
+
+.site-header.scrolled {
+  background: rgba(6, 15, 12, 0.96);
+  border-bottom-color: var(--color-gold-border);
+  box-shadow: var(--shadow-md);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.brand-crown {
+  font-size: 0.9rem;
+  color: var(--color-gold);
+  margin-bottom: 2px;
+}
+
+.brand-name {
+  font-family: var(--font-serif-caps);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-ivory);
+}
+
+.brand-accent {
+  color: var(--color-gold);
+}
+
+.brand-sub {
+  font-size: 0.5625rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 2px;
+}
+
+/* Nav Menu */
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-family: var(--font-serif-caps);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  padding: 0.35rem 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-gold);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-gold);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-phone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.phone-label {
+  font-size: 0.625rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.phone-number {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+.phone-number:hover {
+  color: var(--color-gold);
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--color-gold-border);
+  background: rgba(15, 37, 32, 0.6);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.hamburger-bar {
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: all var(--transition-normal);
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   7. Section 3: Large Hero Section
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-bottom: 9rem; /* extra space for search card floor */
+  overflow: hidden;
+}
+
+.hero-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transform: scale(1.02);
+  transition: transform 12s ease-out;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 23, 19, 0.65) 0%,
+    rgba(9, 23, 19, 0.8) 55%,
+    rgba(9, 23, 19, 0.98) 100%
+  );
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 820px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-serif-caps);
+  font-size: 0.8125rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  background: rgba(9, 23, 19, 0.7);
+  border: 1px solid var(--color-gold-border);
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: var(--glass-blur);
+  margin-bottom: 1.5rem;
+}
+
+.badge-star {
+  color: var(--color-gold);
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+  font-weight: 600;
+  color: var(--color-ivory);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: var(--color-ivory-warm);
+  line-height: 1.7;
+  max-width: 680px;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hero-highlights {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1rem 1.75rem;
+  background: rgba(15, 37, 32, 0.65);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  backdrop-filter: var(--glass-blur);
+}
+
+.hero-highlight-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-val {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1.1;
+}
+
+.highlight-lbl {
+  font-size: 0.75rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-highlight-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--color-gold-border);
+}
+
+/* --------------------------------------------------------------------------
+   8. Section 4: Hotel Search Booking Interface
+   -------------------------------------------------------------------------- */
+.search-bar-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-top: -4.5rem;
+  padding-bottom: 2rem;
+}
+
+.search-card {
+  background: rgba(15, 37, 32, 0.95);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+  backdrop-filter: var(--glass-blur);
+  padding: 2rem 2.25rem;
+}
+
+.search-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gold-border);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.search-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+.search-subtitle {
+  font-size: 0.75rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.1fr auto;
+  gap: 1.25rem;
+  align-items: flex-end;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.search-select,
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-ivory);
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.search-select:focus,
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-glow);
+}
+
+.search-select option {
+  background: var(--color-forest-dark);
+  color: var(--color-ivory);
+}
+
+.search-submit-col {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-search {
+  padding: 0.85rem 1.75rem;
+  height: 48px;
+}
+
+.search-error {
+  display: none;
+  font-size: 0.6875rem;
+  color: #ff6b6b;
+  margin-top: 2px;
+}
+
+.search-error.visible {
+  display: block;
+}
+
+.search-feedback {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  display: none;
+}
+
+.search-feedback.success {
+  display: block;
+  background: rgba(33, 150, 83, 0.15);
+  border: 1px solid rgba(33, 150, 83, 0.4);
+  color: #4ade80;
+}
+
+.search-feedback.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+/* --------------------------------------------------------------------------
+   9. Section 5: Featured Luxury Hotels & Resorts
+   -------------------------------------------------------------------------- */
+.featured-section {
+  background: var(--color-forest-dark);
+}
+
+.resorts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.resort-card {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.resort-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.resort-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.resort-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.resort-card:hover .resort-img {
+  transform: scale(1.05);
+}
+
+.resort-badge-top {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(9, 23, 19, 0.85);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-border);
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: var(--glass-blur);
+}
+
+.resort-rating-badge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(9, 23, 19, 0.85);
+  border: 1px solid var(--color-gold-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  backdrop-filter: var(--glass-blur);
+}
+
+.star-icon {
+  color: var(--color-gold);
+}
+
+.rating-num {
+  font-weight: 700;
+  color: var(--color-ivory);
+}
+
+.rating-count {
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+}
+
+.resort-card-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.resort-location {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  color: var(--color-gold);
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.resort-name {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.resort-desc {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.resort-perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.perk-tag {
+  font-size: 0.75rem;
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-ivory-warm);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--border-radius-sm);
+}
+
+.resort-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gold-border);
+}
+
+.resort-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.price-prefix {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.price-suffix {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   10. Section 6: Popular Destinations
+   -------------------------------------------------------------------------- */
+.destinations-section {
+  background: #060e0c;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.destination-card {
+  position: relative;
+  height: 380px;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.destination-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.destination-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.destination-card:hover .destination-img {
+  transform: scale(1.08);
+}
+
+.destination-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(9, 23, 19, 0.1) 0%, rgba(9, 23, 19, 0.4) 40%, rgba(9, 23, 19, 0.95) 100%);
+}
+
+.destination-info {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+}
+
+.dest-country {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.dest-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin: 0.25rem 0 0.45rem 0;
+}
+
+.dest-stats {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   11. Section 7: Room Categories with Filtering
+   -------------------------------------------------------------------------- */
+.rooms-section {
+  background: var(--color-forest-dark);
+}
+
+.rooms-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.room-filter-btn {
+  font-family: var(--font-serif-caps);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--border-radius-sm);
+  background: var(--color-forest);
+  color: var(--text-muted);
+  border: 1px solid var(--color-gold-border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.room-filter-btn:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.room-filter-btn.active {
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  border-color: var(--color-gold);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.room-card {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.room-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.room-img-box {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+}
+
+.room-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.room-card:hover .room-img {
+  transform: scale(1.05);
+}
+
+.room-category-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(9, 23, 19, 0.85);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-border);
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: var(--glass-blur);
+}
+
+.room-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.room-specs {
+  display: flex;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.room-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.75rem;
+}
+
+.room-desc {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.room-amenities-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gold-border);
+  font-size: 0.8125rem;
+  color: var(--color-ivory-warm);
+}
+
+.room-amenities-list li::before {
+  content: '\2022';
+  color: var(--color-gold);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+}
+
+.room-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gold-border);
+}
+
+.room-rate {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate-val {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.rate-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   12. Section 8: Special Packages & Exclusive Offers
+   -------------------------------------------------------------------------- */
+.offers-section {
+  background: #060e0c;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.offer-card {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.offer-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.offer-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--border-radius-sm);
+  z-index: 2;
+}
+
+.offer-img-box {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.offer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.offer-card:hover .offer-img {
+  transform: scale(1.06);
+}
+
+.offer-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.offer-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.65rem;
+}
+
+.offer-desc {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.offer-inclusions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-ivory-warm);
+}
+
+.offer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gold-border);
+}
+
+.offer-savings {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   13. Section 9: Hotel Facilities & Amenities
+   -------------------------------------------------------------------------- */
+.amenities-section {
+  background: var(--color-forest-dark);
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.amenity-item {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  padding: 2.25rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all var(--transition-normal);
+}
+
+.amenity-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+  background: var(--color-forest-light);
+}
+
+.amenity-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
+  line-height: 1;
+}
+
+.amenity-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.65rem;
+}
+
+.amenity-desc {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   14. Section 10: Guest Testimonials
+   -------------------------------------------------------------------------- */
+.testimonials-section {
+  background: #060e0c;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.testimonial-stars {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-ivory-warm);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  flex-grow: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gold-border);
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  font-family: var(--font-serif-caps);
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+.author-stay {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   15. Section 11: Image Gallery & Lightbox
+   -------------------------------------------------------------------------- */
+.gallery-section {
+  background: var(--color-forest-dark);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  height: 280px;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover .gallery-thumb {
+  transform: scale(1.08);
+}
+
+.gallery-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 23, 19, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  opacity: 1;
+}
+
+.gallery-zoom-icon {
+  font-size: 1.75rem;
+}
+
+.gallery-title {
+  font-family: var(--font-serif-caps);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   16. Section 12: About LUXESTAY
+   -------------------------------------------------------------------------- */
+.about-section {
+  background: #060e0c;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  color: var(--color-ivory);
+  line-height: 1.25;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-gold-light);
+  line-height: 1.7;
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.about-paragraph {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.about-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+}
+
+.metric-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-number {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1.1;
+}
+
+.metric-label {
+  font-size: 0.6875rem;
+  font-family: var(--font-serif-caps);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-signature {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-gold-border);
+}
+
+.signature-text {
+  font-family: var(--font-serif-caps);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.about-image-card {
+  position: relative;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.about-img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+.about-img-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(9, 23, 19, 0.9);
+  border: 1px solid var(--color-gold);
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-serif-caps);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  backdrop-filter: var(--glass-blur);
+}
+
+.badge-gold-star {
+  font-size: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   17. Section 13: FAQ Accordion
+   -------------------------------------------------------------------------- */
+.faq-section {
+  background: var(--color-forest-dark);
+}
+
+.faq-accordion-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.faq-item.active {
+  border-color: var(--color-gold);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-question:hover {
+  color: var(--color-gold);
+}
+
+.faq-icon {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  transition: transform var(--transition-normal);
+  line-height: 1;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-normal);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+}
+
+.faq-answer p {
+  padding: 0 2rem 1.75rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   18. Section 14: Newsletter Subscription UI
+   -------------------------------------------------------------------------- */
+.newsletter-section {
+  background: #060e0c;
+  padding: 5rem 0;
+}
+
+.newsletter-card {
+  background: radial-gradient(circle at top right, var(--color-forest-light) 0%, var(--color-forest) 100%);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--border-radius-lg);
+  padding: 4rem 3rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.newsletter-tag {
+  font-family: var(--font-serif-caps);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.newsletter-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 1rem;
+}
+
+.newsletter-desc {
+  color: var(--color-ivory-warm);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-disclaimer {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.newsletter-input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.newsletter-input {
+  flex-grow: 1;
+  padding: 0.95rem 1.25rem;
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-ivory);
+  font-size: 0.9375rem;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-glow);
+}
+
+.btn-newsletter {
+  padding: 0.95rem 2rem;
+}
+
+.newsletter-feedback {
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  display: none;
+}
+
+.newsletter-feedback.success {
+  display: block;
+  background: rgba(33, 150, 83, 0.2);
+  border: 1px solid rgba(33, 150, 83, 0.5);
+  color: #4ade80;
+}
+
+.newsletter-feedback.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
+/* --------------------------------------------------------------------------
+   19. Section 15: Contact & Concierge
+   -------------------------------------------------------------------------- */
+.contact-section {
+  background: var(--color-forest-dark);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3.5rem;
+}
+
+.contact-info-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.75rem;
+}
+
+.contact-info-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.contact-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-normal);
+}
+
+.contact-card:hover {
+  transform: translateX(4px);
+  border-color: var(--color-gold);
+}
+
+.contact-card-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.contact-card-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.card-val {
+  font-size: 0.9375rem;
+  color: var(--color-ivory);
+  font-weight: 600;
+}
+
+/* Contact Form */
+.contact-form-card {
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-md);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-bottom: 0.25rem;
+}
+
+.form-subtitle {
+  font-size: 0.75rem;
+  font-family: var(--font-serif-caps);
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-label {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.req {
+  color: #ff6b6b;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-ivory);
+  font-size: 0.9375rem;
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px var(--color-gold-glow);
+}
+
+.form-select option {
+  background: var(--color-forest-dark);
+  color: var(--color-ivory);
+}
+
+.field-error {
+  display: none;
+  font-size: 0.75rem;
+  color: #ff6b6b;
+  margin-top: 2px;
+}
+
+.field-error.visible {
+  display: block;
+}
+
+.contact-feedback {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  display: none;
+}
+
+.contact-feedback.success {
+  display: block;
+  background: rgba(33, 150, 83, 0.2);
+  border: 1px solid rgba(33, 150, 83, 0.5);
+  color: #4ade80;
+}
+
+.contact-feedback.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
+/* --------------------------------------------------------------------------
+   20. Section 16: Professional Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: #040807;
+  border-top: 1px solid var(--color-gold-border);
+  padding: 5rem 0 2rem 0;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3.5rem;
+  margin-bottom: 4rem;
+}
+
+.brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  max-width: 340px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.social-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  transition: all var(--transition-fast);
+}
+
+.social-icon:hover {
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  transform: translateY(-2px);
+}
+
+.footer-heading {
+  font-family: var(--font-serif-caps);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+  color: var(--color-gold);
+  transform: translateX(2px);
+  display: inline-block;
+}
+
+.footer-highlight {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-disclaimer {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   21. Lightbox Modal
+   -------------------------------------------------------------------------- */
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 14, 12, 0.95);
+  backdrop-filter: var(--glass-blur);
+}
+
+.lightbox-container {
+  position: relative;
+  z-index: 2001;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-width: 80vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-gold);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-ivory);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  font-size: 2.25rem;
+  color: var(--color-gold);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  color: var(--color-gold-light);
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: var(--color-gold);
+  background: rgba(9, 23, 19, 0.7);
+  border: 1px solid var(--color-gold-border);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-nav-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+}
+
+.lightbox-prev {
+  left: -4rem;
+}
+
+.lightbox-next {
+  right: -4rem;
+}
+
+/* --------------------------------------------------------------------------
+   22. Booking Demonstration Modal
+   -------------------------------------------------------------------------- */
+.booking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.booking-modal.active {
+  display: flex;
+}
+
+.booking-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 14, 12, 0.92);
+  backdrop-filter: var(--glass-blur);
+}
+
+.booking-modal-card {
+  position: relative;
+  z-index: 2001;
+  background: var(--color-forest);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+}
+
+.booking-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 2rem;
+  color: var(--color-gold);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.booking-modal-close:hover {
+  color: var(--color-gold-light);
+}
+
+.booking-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modal-crown {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+}
+
+.booking-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+  margin-top: 0.25rem;
+}
+
+.booking-modal-sub {
+  font-size: 0.8125rem;
+  font-family: var(--font-serif-caps);
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.res-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.res-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.res-label {
+  font-family: var(--font-serif-caps);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.res-input,
+.res-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-ivory);
+  font-size: 0.875rem;
+}
+
+.res-input:focus,
+.res-select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.res-select option {
+  background: var(--color-forest-dark);
+  color: var(--color-ivory);
+}
+
+.res-summary-box {
+  background: var(--color-forest-dark);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--border-radius-sm);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+}
+
+.summary-total {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-gold-border);
+  font-weight: 700;
+  color: var(--color-ivory);
+}
+
+.gold-amount {
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.res-demo-notice {
+  font-size: 0.75rem;
+  color: var(--color-ivory-warm);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--color-gold-border);
+  padding: 0.75rem;
+  border-radius: var(--border-radius-sm);
+  line-height: 1.5;
+}
+
+.res-feedback {
+  padding: 0.85rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.res-feedback.success {
+  display: block;
+  background: rgba(33, 150, 83, 0.2);
+  border: 1px solid rgba(33, 150, 83, 0.5);
+  color: #4ade80;
+}
+
+.res-feedback.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
+/* Floating Back to Top */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-forest-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-gold);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-normal);
+  z-index: 900;
+  cursor: pointer;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-gold-light);
+  transform: translateY(-3px);
+}
+
+/* --------------------------------------------------------------------------
+   23. Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .destinations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-submit-col {
+    grid-column: 1 / -1;
+  }
+
+  .btn-search {
+    width: 100%;
+  }
+
+  .resorts-grid,
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offers-grid,
+  .amenities-grid,
+  .testimonials-grid,
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-img {
+    height: 380px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 70px;
+    --header-height: 72px;
+  }
+
+  .announcement-bar {
+    font-size: 0.75rem;
+  }
+
+  .announcement-link {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .header-phone,
+  .btn-header {
+    display: none;
+  }
+
+  /* Mobile Slide-down Navigation */
+  .nav-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: var(--color-forest);
+    border-bottom: 1px solid var(--color-gold-border);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+  }
+
+  .nav-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    width: 100%;
+    display: block;
+  }
+
+  .hero-highlights {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .hero-highlight-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .destinations-grid,
+  .offers-grid,
+  .amenities-grid,
+  .testimonials-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row,
+  .res-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-input-group {
+    flex-direction: column;
+  }
+
+  .about-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .lightbox-prev {
+    left: 0.5rem;
+  }
+
+  .lightbox-next {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-card {
+    padding: 1.5rem;
+  }
+
+  .room-amenities-list {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-card,
+  .newsletter-card,
+  .booking-modal-card {
+    padding: 1.5rem;
+  }
+}

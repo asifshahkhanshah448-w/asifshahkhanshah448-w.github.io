@@ -1,0 +1,6 @@
+{
+  "name": "LUXESTAY - Luxury Hotel & Resort Website",
+  "description": "Premium luxury hotel and resort booking platform crafted with HTML5, CSS3, and Vanilla JavaScript for GitHub Pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
